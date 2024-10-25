@@ -1,6 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
   return (
     <main className="d-flex w-100">
     <div className="container d-flex flex-column">
@@ -22,6 +27,8 @@ function Login() {
                         type="email"
                         name="email"
                         placeholder="Enter your email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                       />
                     </div>
                     <div className="mb-3">
@@ -31,12 +38,34 @@ function Login() {
                         type="password"
                         name="password"
                         placeholder="Enter your password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>
                     <div className="d-grid gap-2 mt-3">
-                      <a href="Main" className="btn btn-lg btn-primary">
+                      <button onClick={async (e) => {
+                        e.preventDefault();
+
+                        const response = await fetch('http://localhost:8080/api/Auth/Login', {
+                          method: 'POST',
+                          headers: {
+                            'Content-Type': 'application/json',
+                          },
+                          body: JSON.stringify({ email, password }),
+                        });
+
+                        if (!response.ok) {
+                          alert('Login failed');
+                          return;
+                        }
+
+                        const result = await response.json()
+                        localStorage.setItem('token', result.token)
+
+                        navigate('Panel')
+                      }} className="btn btn-lg btn-primary">
                         Sign in
-                      </a>
+                      </button>
                     </div>
                   </form>
                 </div>

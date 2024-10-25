@@ -1,13 +1,17 @@
 import React from "react";
 import { FaSignOutAlt } from "react-icons/fa"; // Import the logout icon
+import fetchWithToken from '.';
+import { useNavigate } from 'react-router-dom';
 
-function Main() {
+function Panel() {
+  const navigate = useNavigate();
 
   const pdfFile = "#"; // Example: If the file is in the public folder
 
   const handleLogout = () => {
     // Implement logout functionality here
-    console.log("Logged out");
+    localStorage.removeItem('token')
+    navigate('/')
   };
   
   return (
@@ -169,4 +173,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default Panel;
