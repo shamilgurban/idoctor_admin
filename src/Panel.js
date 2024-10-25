@@ -1,12 +1,59 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaSignOutAlt } from "react-icons/fa"; // Import the logout icon
-import fetchWithToken from '.';
+import fetchWithToken from './fetchWithToken';
 import { useNavigate } from 'react-router-dom';
 
 function Panel() {
-  const navigate = useNavigate();
+  const [doctors, setDoctors] = useState([])
 
-  const pdfFile = "#"; // Example: If the file is in the public folder
+  useEffect(() => {
+    fetchData();
+  }, [])
+
+  const fetchData = async () => {
+    const response = await fetchWithToken('http://localhost:8080/api/Doctors/GetUnverifiedDoctors', {
+    method: 'GET'
+  });
+
+  if (!response.ok) {
+    alert('Error occured while fetching unverified doctors');
+    return;
+  }
+
+  const doctors = await response.json()
+  setDoctors(doctors)
+}
+
+  const acceptDoctor = async (id) => {
+    const response = await fetchWithToken(`http://localhost:8080/api/Doctors/VerifyDoctor/${id}`, {
+      method: 'PUT'
+    });
+
+    if (response.ok) {
+      fetchData();
+      alert('Doctor accepted')
+    }
+    else {
+      alert('Error occured')
+    }
+  }
+
+  const declineDoctor = async (id) => {
+    const response = await fetchWithToken(`http://localhost:8080/api/Doctors/RejectDoctor/${id}`, {
+      method: 'PUT'
+    });
+
+    if (response.ok) {
+      fetchData();
+      alert('Doctor declined')
+    }
+    else {
+      alert('Error occured')
+    }
+  }
+  
+
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     // Implement logout functionality here
@@ -60,94 +107,19 @@ function Panel() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Nurlan İbrahimov</td>
-                      <td className="d-none d-xl-table-cell">24/10/2024</td>
+                    {doctors.map(doctor => {
+                      return (<tr key={doctor.id}>
+                      <td>{doctor.name} {doctor.surname}</td>
+                      <td className="d-none d-xl-table-cell">{Date.now()}</td>
                       <td className="d-none d-xl-table-cell">
-                          <a href={pdfFile} target="_blank" rel="noopener noreferrer">Test.pdf</a>
+                          <a href={`http://localhost:8080/${doctor.verificationDocumentPath}`} target="_blank" rel="noopener noreferrer">Verifikasiya sənədi</a>
                       </td>
                       <td>
-                        <button className="btn btn-success btn-sm">Accept</button>
-                        <button style={{ margin: "5px"}} className="btn btn-danger btn-sm">Decline</button>
+                        <button onClick={() => acceptDoctor(doctor.id)} className="btn btn-success btn-sm">Accept</button>
+                        <button onClick={() => declineDoctor(doctor.id)} style={{ margin: "5px"}} className="btn btn-danger btn-sm">Decline</button>
                       </td>
-                    </tr>
-                    <tr>
-                      <td>Nurlan İbrahimov</td>
-                      <td className="d-none d-xl-table-cell">24/10/2024</td>
-                      <td className="d-none d-xl-table-cell">
-                          <a href={pdfFile} target="_blank" rel="noopener noreferrer">Test.pdf</a>
-                      </td>
-                      <td>
-                        <button className="btn btn-success btn-sm">Accept</button>
-                        <button style={{ margin: "5px"}} className="btn btn-danger btn-sm">Decline</button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Nurlan İbrahimov</td>
-                      <td className="d-none d-xl-table-cell">01/01/2023</td>
-                      <td className="d-none d-xl-table-cell">
-                          <a href={pdfFile} target="_blank" rel="noopener noreferrer">Test.pdf</a>
-                      </td>
-                      <td>
-                        <button className="btn btn-success btn-sm">Accept</button>
-                        <button style={{ margin: "5px"}} className="btn btn-danger btn-sm">Decline</button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Nurlan İbrahimov</td>
-                      <td className="d-none d-xl-table-cell">01/01/2023</td>
-                      <td className="d-none d-xl-table-cell">
-                          <a href={pdfFile} target="_blank" rel="noopener noreferrer">Test.pdf</a>
-                      </td>
-                      <td>
-                        <button className="btn btn-success btn-sm">Accept</button>
-                        <button style={{ margin: "5px"}} className="btn btn-danger btn-sm">Decline</button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Nurlan İbrahimov</td>
-                      <td className="d-none d-xl-table-cell">01/01/2023</td>
-                      <td className="d-none d-xl-table-cell">
-                          <a href={pdfFile} target="_blank" rel="noopener noreferrer">Test.pdf</a>
-                      </td>
-                      <td>
-                        <button className="btn btn-success btn-sm">Accept</button>
-                        <button style={{ margin: "5px"}} className="btn btn-danger btn-sm">Decline</button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Nurlan İbrahimov</td>
-                      <td className="d-none d-xl-table-cell">01/01/2023</td>
-                      <td className="d-none d-xl-table-cell">
-                          <a href={pdfFile} target="_blank" rel="noopener noreferrer">Test.pdf</a>
-                      </td>
-                      <td>
-                        <button className="btn btn-success btn-sm">Accept</button>
-                        <button style={{ margin: "5px"}} className="btn btn-danger btn-sm">Decline</button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Nurlan İbrahimov</td>
-                      <td className="d-none d-xl-table-cell">01/01/2023</td>
-                      <td className="d-none d-xl-table-cell">
-                          <a href={pdfFile} target="_blank" rel="noopener noreferrer">Test.pdf</a>
-                      </td>
-                      <td>
-                        <button className="btn btn-success btn-sm">Accept</button>
-                        <button style={{ margin: "5px"}} className="btn btn-danger btn-sm">Decline</button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Nurlan İbrahimov</td>
-                      <td className="d-none d-xl-table-cell">01/01/2023</td>
-                      <td className="d-none d-xl-table-cell">
-                          <a href={pdfFile} target="_blank" rel="noopener noreferrer">Test.pdf</a>
-                      </td>
-                      <td>
-                        <button className="btn btn-success btn-sm">Accept</button>
-                        <button style={{ margin: "5px"}} className="btn btn-danger btn-sm">Decline</button>
-                      </td>
-                    </tr>
+                    </tr>)
+                    })}
                   </tbody>
                 </table>
               </div>
