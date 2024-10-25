@@ -1,25 +1,13 @@
-import React, { useState } from "react";
-import Modal from "react-modal"; // For displaying PDFs in a modal
-import PDFViewer from "./PDFViewer";
-import "./App";
+import React from "react";
+import { FaSignOutAlt } from "react-icons/fa"; // Import the logout icon
 
-Modal.setAppElement("#root"); // Set the root element for accessibility
+function Main() {
 
-function App() {
-  // State to track the PDF URL and modal visibility
-  const [isOpen, setIsOpen] = useState(false);
-  const [pdfUrl, setPdfUrl] = useState("");
+  const pdfFile = "#"; // Example: If the file is in the public folder
 
-  // Function to open the PDF viewer
-  const openPDF = (url) => {
-    setPdfUrl(url);
-    setIsOpen(true);
-  };
-
-  // Function to close the PDF viewer
-  const closePDF = () => {
-    setIsOpen(false);
-    setPdfUrl("");
+  const handleLogout = () => {
+    // Implement logout functionality here
+    console.log("Logged out");
   };
   
   return (
@@ -36,26 +24,17 @@ function App() {
     </nav>
     <div className="main">
       <nav className="navbar navbar-expand navbar-light navbar-bg">
-        <a className="sidebar-toggle js-sidebar-toggle">
-          <i className="hamburger align-self-center"></i>
-        </a>
         <div className="navbar-collapse collapse">
           <ul className="navbar-nav navbar-align">
-            <a
-              className="nav-link dropdown-toggle d-none d-sm-inline-block"
-              href="#"
-              data-bs-toggle="dropdown"
-            >
-              <span className="text-dark">Admin</span>
-            </a>
-            <div className="dropdown-menu dropdown-menu-end">
-              <a className="dropdown-item" href="pages-profile.html">
-                Profile
-              </a>
-              <a className="dropdown-item" href="#">
-                Log out
-              </a>
-            </div>
+              {/* Admin and Log out button */}
+              <li className="nav-item d-flex align-items-center">
+                <span className="nav-link d-none d-sm-inline-block text-dark me-2">
+                  ADMIN
+                </span>
+                <button className="btn" onClick={handleLogout} title="Log out">
+                  <FaSignOutAlt size={24} className="text-dark" />
+                </button>
+              </li>
           </ul>
         </div>
       </nav>
@@ -80,121 +59,89 @@ function App() {
                     <tr>
                       <td>Nurlan İbrahimov</td>
                       <td className="d-none d-xl-table-cell">24/10/2024</td>
-                      <td
-                          className="d-none d-xl-table-cell"
-                          style={{ cursor: "pointer", color: "blue", textDecoration: "underline" }}
-                          onClick={() => openPDF("/path-to-your-pdf/Test.pdf")}
-                        >
-                          Test.pdf
-                        </td>
+                      <td className="d-none d-xl-table-cell">
+                          <a href={pdfFile} target="_blank" rel="noopener noreferrer">Test.pdf</a>
+                      </td>
                       <td>
                         <button className="btn btn-success btn-sm">Accept</button>
-                        <button className="btn btn-danger btn-sm">Decline</button>
+                        <button style={{ margin: "5px"}} className="btn btn-danger btn-sm">Decline</button>
                       </td>
                     </tr>
                     <tr>
                       <td>Nurlan İbrahimov</td>
                       <td className="d-none d-xl-table-cell">24/10/2024</td>
-                      <td
-                          className="d-none d-xl-table-cell"
-                          style={{ cursor: "pointer", color: "blue", textDecoration: "underline" }}
-                          onClick={() => openPDF("/path-to-your-pdf/Test.pdf")}
-                        >
-                          Test.pdf
-                        </td>
+                      <td className="d-none d-xl-table-cell">
+                          <a href={pdfFile} target="_blank" rel="noopener noreferrer">Test.pdf</a>
+                      </td>
                       <td>
                         <button className="btn btn-success btn-sm">Accept</button>
-                        <button className="btn btn-danger btn-sm">Decline</button>
+                        <button style={{ margin: "5px"}} className="btn btn-danger btn-sm">Decline</button>
                       </td>
                     </tr>
                     <tr>
                       <td>Nurlan İbrahimov</td>
                       <td className="d-none d-xl-table-cell">01/01/2023</td>
-                      <td
-                          className="d-none d-xl-table-cell"
-                          style={{ cursor: "pointer", color: "blue", textDecoration: "underline" }}
-                          onClick={() => openPDF("/path-to-your-pdf/Test.pdf")}
-                        >
-                          Test.pdf
-                        </td>
+                      <td className="d-none d-xl-table-cell">
+                          <a href={pdfFile} target="_blank" rel="noopener noreferrer">Test.pdf</a>
+                      </td>
                       <td>
                         <button className="btn btn-success btn-sm">Accept</button>
-                        <button className="btn btn-danger btn-sm">Decline</button>
+                        <button style={{ margin: "5px"}} className="btn btn-danger btn-sm">Decline</button>
                       </td>
                     </tr>
                     <tr>
                       <td>Nurlan İbrahimov</td>
                       <td className="d-none d-xl-table-cell">01/01/2023</td>
-                      <td
-                          className="d-none d-xl-table-cell"
-                          style={{ cursor: "pointer", color: "blue", textDecoration: "underline" }}
-                          onClick={() => openPDF("/path-to-your-pdf/Test.pdf")}
-                        >
-                          Test.pdf
-                        </td>
+                      <td className="d-none d-xl-table-cell">
+                          <a href={pdfFile} target="_blank" rel="noopener noreferrer">Test.pdf</a>
+                      </td>
                       <td>
                         <button className="btn btn-success btn-sm">Accept</button>
-                        <button className="btn btn-danger btn-sm">Decline</button>
+                        <button style={{ margin: "5px"}} className="btn btn-danger btn-sm">Decline</button>
                       </td>
                     </tr>
                     <tr>
                       <td>Nurlan İbrahimov</td>
                       <td className="d-none d-xl-table-cell">01/01/2023</td>
-                      <td
-                          className="d-none d-xl-table-cell"
-                          style={{ cursor: "pointer", color: "blue", textDecoration: "underline" }}
-                          onClick={() => openPDF("/path-to-your-pdf/Test.pdf")}
-                        >
-                          Test.pdf
-                        </td>
+                      <td className="d-none d-xl-table-cell">
+                          <a href={pdfFile} target="_blank" rel="noopener noreferrer">Test.pdf</a>
+                      </td>
                       <td>
                         <button className="btn btn-success btn-sm">Accept</button>
-                        <button className="btn btn-danger btn-sm">Decline</button>
+                        <button style={{ margin: "5px"}} className="btn btn-danger btn-sm">Decline</button>
                       </td>
                     </tr>
                     <tr>
                       <td>Nurlan İbrahimov</td>
                       <td className="d-none d-xl-table-cell">01/01/2023</td>
-                      <td
-                          className="d-none d-xl-table-cell"
-                          style={{ cursor: "pointer", color: "blue", textDecoration: "underline" }}
-                          onClick={() => openPDF("/path-to-your-pdf/Test.pdf")}
-                        >
-                          Test.pdf
-                        </td>
+                      <td className="d-none d-xl-table-cell">
+                          <a href={pdfFile} target="_blank" rel="noopener noreferrer">Test.pdf</a>
+                      </td>
                       <td>
                         <button className="btn btn-success btn-sm">Accept</button>
-                        <button className="btn btn-danger btn-sm">Decline</button>
+                        <button style={{ margin: "5px"}} className="btn btn-danger btn-sm">Decline</button>
                       </td>
                     </tr>
                     <tr>
                       <td>Nurlan İbrahimov</td>
                       <td className="d-none d-xl-table-cell">01/01/2023</td>
-                      <td
-                          className="d-none d-xl-table-cell"
-                          style={{ cursor: "pointer", color: "blue", textDecoration: "underline" }}
-                          onClick={() => openPDF("/path-to-your-pdf/Test.pdf")}
-                        >
-                          Test.pdf
-                        </td>
+                      <td className="d-none d-xl-table-cell">
+                          <a href={pdfFile} target="_blank" rel="noopener noreferrer">Test.pdf</a>
+                      </td>
                       <td>
                         <button className="btn btn-success btn-sm">Accept</button>
-                        <button className="btn btn-danger btn-sm">Decline</button>
+                        <button style={{ margin: "5px"}} className="btn btn-danger btn-sm">Decline</button>
                       </td>
                     </tr>
                     <tr>
                       <td>Nurlan İbrahimov</td>
                       <td className="d-none d-xl-table-cell">01/01/2023</td>
-                      <td
-                          className="d-none d-xl-table-cell"
-                          style={{ cursor: "pointer", color: "blue", textDecoration: "underline" }}
-                          onClick={() => openPDF("/path-to-your-pdf/Test.pdf")}
-                        >
-                          Test.pdf
-                        </td>
+                      <td className="d-none d-xl-table-cell">
+                          <a href={pdfFile} target="_blank" rel="noopener noreferrer">Test.pdf</a>
+                      </td>
                       <td>
                         <button className="btn btn-success btn-sm">Accept</button>
-                        <button className="btn btn-danger btn-sm">Decline</button>
+                        <button style={{ margin: "5px"}} className="btn btn-danger btn-sm">Decline</button>
                       </td>
                     </tr>
                   </tbody>
@@ -217,14 +164,9 @@ function App() {
         </div>
       </main>
     </div>
-         {/* Modal to show the PDF */}
-         <Modal isOpen={isOpen} onRequestClose={closePDF}>
-        <PDFViewer fileUrl={pdfUrl} />
-        <button onClick={closePDF}>Close</button>
-      </Modal>
   </div>
 
   );
 }
 
-export default App;
+export default Main;
