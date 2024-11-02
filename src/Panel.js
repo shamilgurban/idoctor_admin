@@ -11,7 +11,7 @@ function Panel() {
   }, [])
 
   const fetchData = async () => {
-    const response = await fetchWithToken('http://localhost:8080/api/Doctors/GetUnverifiedDoctors', {
+    const response = await fetchWithToken('http://94.20.82.6:8080/api/Doctors/GetUnverifiedDoctors', {
     method: 'GET'
   });
 
@@ -25,7 +25,7 @@ function Panel() {
 }
 
   const acceptDoctor = async (id) => {
-    const response = await fetchWithToken(`http://localhost:8080/api/Doctors/VerifyDoctor/${id}`, {
+    const response = await fetchWithToken(`http://94.20.82.6:8080/api/Doctors/VerifyDoctor/${id}`, {
       method: 'PUT'
     });
 
@@ -39,7 +39,7 @@ function Panel() {
   }
 
   const declineDoctor = async (id) => {
-    const response = await fetchWithToken(`http://localhost:8080/api/Doctors/RejectDoctor/${id}`, {
+    const response = await fetchWithToken(`http://94.20.82.6:8080/api/Doctors/RejectDoctor/${id}`, {
       method: 'PUT'
     });
 
@@ -112,7 +112,7 @@ function Panel() {
                       <td>{doctor.name} {doctor.surname}</td>
                       <td className="d-none d-xl-table-cell">{Date.now()}</td>
                       <td className="d-none d-xl-table-cell">
-                          <a href={`http://localhost:8080/${doctor.verificationDocumentPath}`} target="_blank" rel="noopener noreferrer">Verifikasiya sənədi</a>
+                          <a href={`http://94.20.82.6:8080/${doctor.verificationDocumentPath}`} target="_blank" rel="noopener noreferrer">Verifikasiya sənədi</a>
                       </td>
                       <td>
                         <button onClick={() => acceptDoctor(doctor.id)} className="btn btn-success btn-sm">Accept</button>
