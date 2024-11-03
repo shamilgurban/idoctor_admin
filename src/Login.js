@@ -46,7 +46,7 @@ function Login() {
                       <button onClick={async (e) => {
                         e.preventDefault();
 
-                        const response = await fetch('http://94.20.82.6:8080/api/Auth/Login', {
+                        const response = await fetch('http://idoktor.org:8080/api/Auth/Login', {
                           method: 'POST',
                           headers: {
                             'Content-Type': 'application/json',
